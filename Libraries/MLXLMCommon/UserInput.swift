@@ -227,6 +227,8 @@ public struct UserInput: Sendable {
         additionalContext: [String: Any]? = nil
     ) {
         self.prompt = .messages(messages)
+        self.images = images
+        self.videos = videos
         self.tools = tools
         self.additionalContext = additionalContext
     }
@@ -249,12 +251,14 @@ public struct UserInput: Sendable {
     /// - Parameters:
     ///   - chat: structured content
     ///   - tools: optional tool specifications
+    ///   - processing: optional processing to be applied to media
     ///   - additionalContext: optional context (model specific)
     /// ### See Also
     /// - ``Prompt-swift.enum/text(_:)``
     /// - ``init(chat:tools:additionalContext:)``
     public init(
         chat: [Chat.Message],
+        processing: Processing = .init(),
         tools: [ToolSpec]? = nil,
         additionalContext: [String: Any]? = nil
     ) {
@@ -267,6 +271,8 @@ public struct UserInput: Sendable {
         self.videos = chat.reduce(into: []) { result, message in
             result.append(contentsOf: message.videos)
         }
+
+        self.processing = processing
         self.tools = tools
         self.additionalContext = additionalContext
     }
