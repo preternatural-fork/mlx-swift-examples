@@ -28,7 +28,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/preternatural-fork/mlx-swift.git", branch: "main"),
-        .package(url: "https://github.com/preternatural-fork/swift-transformers", branch: "main"),
+        .package(url: "https://github.com/huggingface/swift-transformers", .upToNextMinor(from: "0.1.21")),
         .package(url: "https://github.com/1024jp/GzipSwift", "6.0.1" ... "6.0.1"),  // Only needed by MLXMNIST
     ],
     targets: [
